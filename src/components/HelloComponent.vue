@@ -1,13 +1,18 @@
 <template>
-  <h1>Hello {{ name }}!</h1>
+  <h1 @click="onClick">Hello {{ name }}!</h1>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
   props: {
-    name: {
-      type: String,
-      required: true
-    }
+    name: String
+  }
+})
+export default class HelloComponent extends Vue {
+  onClick ():void {
+    alert(this.$props.name)
   }
 }
 </script>

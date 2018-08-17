@@ -18,20 +18,37 @@ module.exports = {
       poll: true
     }
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
+  },
   module: {
     rules: [
       {
-        test: /\.(js|vue)?$/,
-        use: 'eslint-loader',
-        enforce: 'pre'
+        test: /\.ts$/,
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        loader: 'tslint-loader',
+        options: {
+          tsConfigFile: 'tsconfig.json',
+        }
       },
       {
-        test: /\.vue$/,
-        use: 'vue-loader'
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+        include: [resolve('src'), resolve('test')],
+        enforce: 'post'
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
       },
       {
         test: /\.(scss|css)?$/,

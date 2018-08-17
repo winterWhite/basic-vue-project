@@ -10,11 +10,16 @@
     }
 </style>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import HelloComponent from './components/HelloComponent.vue'
-export default {
-  components: {
-    HelloComponent
-  }
+
+@Component({
+    components: {
+        HelloComponent
+    }
+})
+export default class Index extends Vue{
 }
 </script>
